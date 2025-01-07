@@ -11,153 +11,153 @@ interface CustomAxiosRequestConfig extends AxiosRequestConfig {
   _toastAdded?: boolean;
 }
 
-const setRequestAuthorizationHeader = (requestConfig: any, token: any) => {
-  requestConfig.headers["Authorization"] = `Bearer ${token}`;
-};
+// const setRequestAuthorizationHeader = (requestConfig: any, token: any) => {
+//   requestConfig.headers["Authorization"] = `Bearer ${token}`;
+// };
 
-export const toastSuccess = (title: string) => {
-  useToastStore.getState().addToast({
-    title,
-    date: new Date().toLocaleTimeString(),
-    icon: '/successToast.svg',
-    backgroundColor: '--toast-background-green',
-  });
-};
+// export const toastSuccess = (title: string) => {
+//   useToastStore.getState().addToast({
+//     title,
+//     date: new Date().toLocaleTimeString(),
+//     icon: '/successToast.svg',
+//     backgroundColor: '--toast-background-green',
+//   });
+// };
 
-export const toastError = (title: string) => {
-  useToastStore.getState().addToast({
-    title,
-    date: new Date().toLocaleTimeString(),
-    icon: '/errorToast.svg',
-    backgroundColor: '--toast-background-red',
-  });
-};
+// export const toastError = (title: string) => {
+//   useToastStore.getState().addToast({
+//     title,
+//     date: new Date().toLocaleTimeString(),
+//     icon: '/errorToast.svg',
+//     backgroundColor: '--toast-background-red',
+//   });
+// };
 
-axios.interceptors.request.use(
-  (config) => {
-    const token = useAuthStore.getState().getToken();
+// axios.interceptors.request.use(
+//   (config) => {
+//     const token = useAuthStore.getState().getToken();
 
-    if (token) {
+//     if (token) {
 
-      config.headers = config.headers || {};
+//       config.headers = config.headers || {};
 
-      setRequestAuthorizationHeader(config, token)
+//       setRequestAuthorizationHeader(config, token)
 
-    }
+//     }
 
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
 
-//Route key is used to find the route that was sent (eg /Users) and to
-//based on that, it is determined which message for the post or path will be displayed
-//from toastMessage
-axios.interceptors.response.use(
-  (response) => {
+// //Route key is used to find the route that was sent (eg /Users) and to
+// //based on that, it is determined which message for the post or path will be displayed
+// //from toastMessage
+// axios.interceptors.response.use(
+//   (response) => {
 
-    const config = response.config as CustomAxiosRequestConfig;
+//     const config = response.config as CustomAxiosRequestConfig;
 
-    if ((response.status === 200 || response.status === 204) && config.method) {
-      const routeKey = Object.keys(toastMessages).find((route) => config.url?.includes(route));
+//     if ((response.status === 200 || response.status === 204) && config.method) {
+//       const routeKey = Object.keys(toastMessages).find((route) => config.url?.includes(route));
 
-      //if there is routeKey and toastMessage[][] then AxiosRequestConfig is extended
-      //with one auxiliary flag that is set only on the first incoming request
-      //set to true to not show duplicate Toasts
-      if (routeKey && toastMessages[routeKey][config.method]) {
-        if (!config._toastAdded) {
+//       //if there is routeKey and toastMessage[][] then AxiosRequestConfig is extended
+//       //with one auxiliary flag that is set only on the first incoming request
+//       //set to true to not show duplicate Toasts
+//       if (routeKey && toastMessages[routeKey][config.method]) {
+//         if (!config._toastAdded) {
 
-          config._toastAdded = true;
+//           config._toastAdded = true;
 
-          toastSuccess(toastMessages[routeKey][config.method])
-        }
-      }
-    }
-    else {
-      toastError(toastMessages['ServerErrors']['wrong'])
-    }
+//           toastSuccess(toastMessages[routeKey][config.method])
+//         }
+//       }
+//     }
+//     else {
+//       toastError(toastMessages['ServerErrors']['wrong'])
+//     }
 
-    return response;
+//     return response;
 
-  },
-  async (error) => {
+//   },
+//   async (error) => {
 
-    if (error.response) {
+//     if (error.response) {
 
-      if (error.response.status === 500) {
-        toastError(toastMessages['ServerErrors']['offline'])
-        return Promise.reject(error);
-      }
+//       if (error.response.status === 500) {
+//         toastError(toastMessages['ServerErrors']['offline'])
+//         return Promise.reject(error);
+//       }
 
-      const routeKey = Object.keys(toastMessages).find((route) => error.config.url?.includes(route));
+//       const routeKey = Object.keys(toastMessages).find((route) => error.config.url?.includes(route));
 
-      if (routeKey && toastMessages[routeKey]['error']) {
+//       if (routeKey && toastMessages[routeKey]['error']) {
 
-        toastError(toastMessages[routeKey]['error'])
+//         toastError(toastMessages[routeKey]['error'])
 
-      }
-      } else if (error.request.status === 0) {
+//       }
+//       } else if (error.request.status === 0) {
 
-        toastError(toastMessages['ServerErrors']['wrong'])
+//         toastError(toastMessages['ServerErrors']['wrong'])
 
-        return Promise.reject(error);
-      }
+//         return Promise.reject(error);
+//       }
 
-    const refreshToken = useAuthStore.getState().refreshToken;
-    const originalRequest = error.config;
+//     const refreshToken = useAuthStore.getState().refreshToken;
+//     const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry && refreshToken) {
-      if (useAuthStore.getState().refreshTokenInProgress) {
-        return new Promise(function (resolve, reject) {
-          useAuthStore.getState().addRequestToQueue({ resolve, reject });
-        })
-          .then((token) => {
-            setRequestAuthorizationHeader(originalRequest, token);
-            return axios.request(originalRequest);
-          })
-          .catch((err) => {
-            return Promise.reject(err);
-          });
-      }
+//     if (error.response?.status === 401 && !originalRequest._retry && refreshToken) {
+//       if (useAuthStore.getState().refreshTokenInProgress) {
+//         return new Promise(function (resolve, reject) {
+//           useAuthStore.getState().addRequestToQueue({ resolve, reject });
+//         })
+//           .then((token) => {
+//             setRequestAuthorizationHeader(originalRequest, token);
+//             return axios.request(originalRequest);
+//           })
+//           .catch((err) => {
+//             return Promise.reject(err);
+//           });
+//       }
 
-      originalRequest._retry = true;
-      useAuthStore.getState().setRefreshTokenInProgress(true);
+//       originalRequest._retry = true;
+//       useAuthStore.getState().setRefreshTokenInProgress(true);
 
-      return new Promise(async (resolve, reject) => {
-        try {
-          const response = await useAuthStore.getState().refreshTokenAsync(refreshToken);
+//       return new Promise(async (resolve, reject) => {
+//         try {
+//           const response = await useAuthStore.getState().refreshTokenAsync(refreshToken);
 
-          setRequestAuthorizationHeader(originalRequest, response.token);
+//           setRequestAuthorizationHeader(originalRequest, response.token);
 
-          processQueue(null, response.token);
-          resolve(axios(originalRequest));
-        } catch (err) {
-          processQueue(err, null);
-          reject(err);
-        } finally {
-          useAuthStore.getState().setRefreshTokenInProgress(false);
-        }
-      });
-    }
+//           processQueue(null, response.token);
+//           resolve(axios(originalRequest));
+//         } catch (err) {
+//           processQueue(err, null);
+//           reject(err);
+//         } finally {
+//           useAuthStore.getState().setRefreshTokenInProgress(false);
+//         }
+//       });
+//     }
 
-    return Promise.reject(error);
-  }
-);
+//     return Promise.reject(error);
+//   }
+// );
 
 
-const processQueue = (error: any, token: string | null = null) => {
-  useAuthStore.getState().requestQueue.forEach((prom: any) => {
-    if (error) {
-      prom.reject(error);
-    } else {
-      prom.resolve(token);
-    }
-  });
+// const processQueue = (error: any, token: string | null = null) => {
+//   useAuthStore.getState().requestQueue.forEach((prom: any) => {
+//     if (error) {
+//       prom.reject(error);
+//     } else {
+//       prom.resolve(token);
+//     }
+//   });
 
-  useAuthStore.getState().clearRequestQueue();
-};
+//   useAuthStore.getState().clearRequestQueue();
+// };
 
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data

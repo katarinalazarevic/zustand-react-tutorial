@@ -1,6 +1,6 @@
 export const ROUTES = {
     LOGIN_ROUTE: "/",
-    ADMIN_LANDING_PAGE:"/admin-landing-page",
+    USER_LANDING_PAGE:"/landing-page",
     RESET_PASSWORD_EMAIL:"/email-password-reset",
     COMPANY_INFORMATION: "/company/:id",
 }

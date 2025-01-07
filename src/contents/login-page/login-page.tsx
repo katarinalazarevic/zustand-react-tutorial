@@ -45,27 +45,17 @@ export const LoginPageContent: React.FC = () => {
     setShowPassword(!showPassword);
   };
 
-  // const handleForgotPasswordClick = () => {
-  //   navigate(ROUTES.RESET_PASSWORD_EMAIL);
-  // };
-
   const handleLoginSubmit = async (values: any, { setSubmitting }: any) => {
     await authStore.login(values.email, values.password);
 
-    if (authStore.hasRole(Roles.SUPERADMIN)) {
-      navigate(ROUTES.ADMIN_LANDING_PAGE);
-    } else {
-      navigate(ROUTES.ADMIN_LANDING_PAGE);
-    }
+    navigate(ROUTES.USER_LANDING_PAGE);
+
     setSubmitting(false);
   };
 
   return (
     <Container>
       <Card>
-        {/* <ImageContainer>
-          <ImageLogin src={'/photoLogin.png'}></ImageLogin>
-        </ImageContainer> */}
         <FormContainer>
           <Title>Prijavite se</Title>
           <Formik

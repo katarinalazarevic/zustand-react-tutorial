@@ -1,3 +1,4 @@
+import axios from "axios";
 import requests from "src/services/apiService";
 
 export interface LoginRequest {
@@ -15,17 +16,22 @@ export interface PasswordResetRequest {
   password: string;
 }
 
-export const login = async (email: string, password: string): Promise<LoginResponse> => {
+export const login = async (email: string, password: string) => {
   try {
-    const body: LoginRequest = { email, password };
+    const response = await axios.get(`http://localhost:5000/users`, {
+      params: { email, password }
+    });
 
-    const response = await requests.post<LoginResponse>('/Authentication/login', body);
+    if (response.data.length > 0){
+      const user = response.data[0]; 
 
-    return response;
-    
-  } catch (error) {
-    console.error('Login failed:', error);
-    throw error;
+      return user
+    }
+    else{
+      console.error("Login failed")
+    }
+  } catch (err) {
+    console.error("Login failed");
   }
 };
 

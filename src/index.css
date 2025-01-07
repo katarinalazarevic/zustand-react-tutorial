@@ -6,8 +6,8 @@
   --error-message:#CF1547;
   --login-pagecontainer-background:#EDDFE0;
   --box-shadow:rgba(0, 0, 0, 0.1);
-  --login-button:#566452;
-  --login-button-hover:#6a7767;
+  --login-button:#619057;
+  --login-button-hover:#527b49;
   --login-forgot-password:#969E9F;
   --login-title:#011F26;
   --text-color-gray: #FDFDFD;
@@ -49,7 +49,7 @@
   --confirm-primary-over:#1E7B90;
 
   --cancel-edit-input:#F9F9F9;
-  --cancel-edit-text:#545454
+  --cancel-edit-text:#545454;
 
   --upload-image-company:#007BFF;
   --background-drag-over:#eee;

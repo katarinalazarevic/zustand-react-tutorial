@@ -19,8 +19,6 @@ import { useAuthStore } from "src/store/user/useAuthStore";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { toastMessages } from "src/constants/route-constants";
-import { useToastStore } from "src/store/toast/useToastStore";
-import { toastSuccess } from "src/services/apiService";
 
 const languageOptions: string[] = ["sr", "en"];
 
@@ -41,8 +39,7 @@ export const PrimaryHeader = () => {
     setOpen(false)
   };
 
-  const { logout, isLoggedIn, firstName, lastName ,initials } = useAuthStore();
-
+  const { logout, isLoggedIn, firstName } = useAuthStore();
   const store = useLanguageStore()
 
   const id = open ? 'simple-popover' : undefined;
@@ -59,7 +56,6 @@ export const PrimaryHeader = () => {
     setAnchorEl(null)
     logout();
     
-    toastSuccess(toastMessages['logout']['post'])
 
   };
 
@@ -70,31 +66,9 @@ export const PrimaryHeader = () => {
       </HeaderContainerWrapper>
       {isLoggedIn && <AvatarDiv>
 
-        <IconButton onClick={handleAvatarClick} sx={{marginRight:"0.5rem"}}>
-          <Avatar sx={{ bgcolor: 'var(--secondary-brand-color-yellow2)', color: 'black'}}>{initials}</Avatar>
+        <IconButton sx={{marginRight:"0.5rem"}}>
+          <Avatar sx={{ bgcolor: 'var(--secondary-brand-color-yellow2)', color: 'black', width:"4rem"}}>{firstName}</Avatar>
         </IconButton>
-
-        <Popover
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}>
-
-          <LogoutContainer onClick={handleLogout}>
-            <LabelWithPointer>{t('logoutLabel')}</LabelWithPointer>
-            <LogoutIcon src={'/logoutIcon.svg'} alt={t('logoutLabel')} />
-          </LogoutContainer>
-          
-        </Popover>
 
       </AvatarDiv>}
 
