@@ -3,10 +3,21 @@
     {
       "id": 1,
       "firstName": "John",
-      "lastName":"Doe",
+      "lastName": "Doe",
       "email": "john.doe@example.com",
       "password": "Sifra.123"
     },
-    { "id": 2, "name": "Jane Doe" }
+    {
+      "id": 2,
+      "name": "Jane Doe"
+    }
+  ],
+  "tasks": [
+    {
+      "title": "Zameni posteljinu",
+      "description": "",
+      "completed": false,
+      "id": 1748285322671
+    }
   ]
 }
