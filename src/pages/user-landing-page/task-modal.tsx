@@ -1,5 +1,6 @@
 // TaskModal.tsx
 import React, { useState, useEffect } from "react";
+import { Title } from "src/contents/login-page/login-page.styled";
 import useTaskStore from "src/store/task-store/useTaskStore";
 import styled from "styled-components";
 
@@ -23,15 +24,17 @@ const Modal = styled.div`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 94%;
   padding: 10px;
   margin-bottom: 1rem;
+  font-size: 16px;
 `;
 
 const TextArea = styled.textarea`
-  width: 100%;
+  width: 95%;
   padding: 10px;
   margin-bottom: 1rem;
+  font-size: 16px;
 `;
 
 const ButtonGroup = styled.div`
@@ -43,12 +46,26 @@ const ButtonGroup = styled.div`
 const CancelButton = styled.button`
   background-color: #ccc;
   padding: 8px 16px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    background-color: #b8b7b7;
+  }
 `;
 
 const SaveButton = styled.button`
-  background-color: #4caf50;
+  background-color: var(--login-button);
   color: white;
   padding: 8px 16px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    background-color: #5b9d58;
+  }
 `;
 
 interface Props {
@@ -96,7 +113,7 @@ const TaskModal: React.FC<Props> = ({ onClose }) => {
   return (
     <ModalOverlay>
       <Modal>
-        <h3>{selectedTask ? "Izmeni zadatak" : "Novi zadatak"}</h3>
+        <Title style={{fontSize:"24px", margin:"0px"}}>{selectedTask ? "Izmeni zadatak" : "Novi zadatak"}</Title>
         <Input
           placeholder="Naslov"
           value={title}

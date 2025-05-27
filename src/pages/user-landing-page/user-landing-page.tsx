@@ -22,16 +22,16 @@ const SectionTitle = styled.h2`
 `;
 
 const AddButton = styled.button`
-  background-color: #4caf50;
+  background-color: #73b874;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-bottom: 1rem;
-
+  font-size: 16px;
   &:hover {
-    background-color: #45a049;
+    background-color: #69b165;
   }
 `;
 
@@ -50,7 +50,7 @@ const TaskPage: React.FC = () => {
         + Novi zadatak
       </AddButton>
 
-      <SectionTitle>🔧 Aktivni zadaci</SectionTitle>
+      <SectionTitle>✨Aktivni zadaci</SectionTitle>
       <TaskList />
 
       <SectionTitle style={{ paddingTop: "3rem" }}>

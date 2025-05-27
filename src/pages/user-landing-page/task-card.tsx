@@ -4,21 +4,19 @@ import useTaskStore, { Task } from "src/store/task-store/useTaskStore";
 import styled from "styled-components";
 
 const Card = styled.div<{ $completed: boolean }>`
+  display: flex;
+  justify-content: space-between;
   background: ${({ $completed }) => ($completed ? "#d0f0c0" : "#f8f8f8")};
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 8px;
   position: relative;
   cursor: pointer;
-  opacity: ${({ $completed }) => ($completed ? 0.8 : 1)};
+  opacity: ${({ $completed }) => ($completed ? 0.9 : 1)};
 `;
 
 const ButtonGroup = styled.div`
-  position: absolute;
-  top: 8px;
-  right: 8px;
   display: flex;
-  gap: 5px;
 `;
 
 const IconButton = styled.button`
@@ -43,9 +41,10 @@ const TaskCard: React.FC<Props> = ({ task }) => {
 
   return (
     <Card onClick={handleCardClick} $completed={task.completed}>
-      <strong>{task.title}</strong>
-      <p>{task.description}</p>
-
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <strong>{task.title}</strong>
+        <span style={{ paddingTop: "5px" }}>{task.description}</span>
+      </div>
       <ButtonGroup onClick={(e) => e.stopPropagation()}>
         {!task.completed && (
           <IconButton onClick={() => toggleComplete(task.id)}>✅</IconButton>
