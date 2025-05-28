@@ -8,13 +8,15 @@ import TaskModal from "./task-modal";
 
 const Container = styled.div`
   padding: 2rem;
-  max-width: 800px;
+  max-width: 1400px;
   margin: auto;
 `;
 
 const Header = styled.h1`
   text-align: center;
   margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: #1a1a1a;
 `;
 
 const SectionTitle = styled.h2`
@@ -25,6 +27,7 @@ const AddButton = styled.button`
   background-color: #73b874;
   color: white;
   padding: 10px 20px;
+  height: 50%;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -46,18 +49,54 @@ const TaskPage: React.FC = () => {
   return (
     <Container>
       <Header>📋 Lista zadataka</Header>
-      <AddButton onClick={() => setShowCreateModal(true)}>
-        + Novi zadatak
-      </AddButton>
-
-      <SectionTitle>✨Aktivni zadaci</SectionTitle>
-      <TaskList />
-
-      <SectionTitle style={{ paddingTop: "3rem" }}>
-        ✅ Završeni zadaci
-      </SectionTitle>
-      <CompletedTaskList />
-
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: "30px",
+          width: "100%",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "50%",
+            backgroundColor: "#FEF9F2",
+            borderRadius: "1rem",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              padding: "0rem 0.2rem",
+            }}
+          >
+            <SectionTitle>✨Aktivni zadaci</SectionTitle>
+            <AddButton onClick={() => setShowCreateModal(true)}>
+              + Novi zadatak
+            </AddButton>
+          </div>
+          <div style={{ padding: "0rem 0.2rem" }}>
+            <TaskList />
+          </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "50%",
+            backgroundColor: "#FEF9F2",
+            borderRadius: "1rem",
+            padding: "0rem 0.2rem"
+          }}
+        >
+          <SectionTitle>✓ Završeni zadaci</SectionTitle>
+          <CompletedTaskList />
+        </div>
+      </div>
       {showCreateModal && (
         <TaskModal onClose={() => setShowCreateModal(false)} />
       )}

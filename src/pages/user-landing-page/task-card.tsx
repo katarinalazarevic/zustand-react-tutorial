@@ -6,9 +6,9 @@ import styled from "styled-components";
 const Card = styled.div<{ $completed: boolean }>`
   display: flex;
   justify-content: space-between;
-  background: ${({ $completed }) => ($completed ? "#d0f0c0" : "#f8f8f8")};
+  background: ${({ $completed }) => ($completed ? "#AFD3E2" : "white")};
   padding: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   border-radius: 8px;
   position: relative;
   cursor: pointer;
@@ -47,9 +47,9 @@ const TaskCard: React.FC<Props> = ({ task }) => {
       </div>
       <ButtonGroup onClick={(e) => e.stopPropagation()}>
         {!task.completed && (
-          <IconButton onClick={() => toggleComplete(task.id)}>✅</IconButton>
+          <IconButton onClick={() => toggleComplete(task.id)}>✔️</IconButton>
         )}
-        <IconButton onClick={() => deleteTask(task.id)}>🗑️</IconButton>
+        <IconButton onClick={() => deleteTask(task.id)}>🗙</IconButton>
       </ButtonGroup>
     </Card>
   );

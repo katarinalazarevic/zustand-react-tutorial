@@ -7,7 +7,8 @@ import { EmptyMessage } from './task-list'
 const List = styled.ul`
   list-style: none;
   padding: 0;
-`
+  margin: 0;
+`;
 
 const Item = styled.li`
   padding: 10px;
