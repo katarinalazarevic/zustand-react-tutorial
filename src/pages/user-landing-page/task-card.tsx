@@ -6,13 +6,16 @@ import styled from "styled-components";
 const Card = styled.div<{ $completed: boolean }>`
   display: flex;
   justify-content: space-between;
-  background: ${({ $completed }) => ($completed ? "#AFD3E2" : "white")};
+  background: ${({ $completed }) => ($completed ? "#e3f2fd" : "#ffffff")};
   padding: 1rem;
-  margin-bottom: 0.5rem;
-  border-radius: 8px;
-  position: relative;
+  margin-bottom: 0.75rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   cursor: pointer;
-  opacity: ${({ $completed }) => ($completed ? 0.9 : 1)};
+  transition: transform 0.2s ease;
+  &:hover {
+    transform: translateY(-2px);
+  }
 `;
 
 const ButtonGroup = styled.div`

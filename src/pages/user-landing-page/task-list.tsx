@@ -6,8 +6,9 @@ import styled from "styled-components";
 export const EmptyMessage = styled.div`
   text-align: center;
   margin-top: 2rem;
-  color: #777;
+  color: #999;
   font-style: italic;
+  font-size: 1rem;
 `;
 
 const TaskList: React.FC = () => {
