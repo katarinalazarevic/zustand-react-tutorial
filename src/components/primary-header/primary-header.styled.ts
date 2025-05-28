@@ -20,7 +20,6 @@ export const HeaderContainerWrapper = styled(Box)`
   left: 2.5rem; 
   display: flex;
   align-items: center;
-  width: 12.0625rem; 
   height: 2.25rem; 
 `;
 
@@ -33,7 +32,6 @@ export const HeaderLogo = styled.div`
 `;
 
 export const HeaderText = styled.div`
-  width: 9.4375rem;
   height: 2.25rem;
   opacity: 1;
   font-size: var(--font-24-size);
