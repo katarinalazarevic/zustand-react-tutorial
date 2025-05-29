@@ -1,7 +1,14 @@
-# Fast and scalable React Typescript Starter
-This is an opinionated starter for react projects with typescript.
+# Upravljanje stanjem u React aplikaciji pomoću Zustand biblioteke
+**ToDo App** je jednostavna, responzivna aplikacija za upravljanje zadacima — kreirana u Reactu fokusirana na demonstraciju korišćenja Zustand biblioteke za upravljanje globalnim stanjem aplikacije.
 
-# important package.json scripts
+# Sadržaj
+- [Uvod](#uvod)
+- [Tehnologije](#uvod)
+- [React i upravljanje stanjem u React aplikacijama](#uvod)
+- [Zustand](#uvod)
+- [Pokretanje projekta](#uvod)
+
+
 - `start` starts the development server
 - `build` compiles the application
 - `lint` runs the linter
@@ -9,8 +16,8 @@ This is an opinionated starter for react projects with typescript.
 - `validate` runs type checking, linting and testing
 - `cy:run` runs the cypress tests
 - `generate` runs the code generator
-
-# Features
+## Uvod
+## Features
 - [React](https://reactjs.org/)
 - [Typescript](https://www.typescriptlang.org/)
 - [Zustand](https://github.com/pmndrs/zustand)
