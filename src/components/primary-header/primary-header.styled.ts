@@ -3,24 +3,22 @@ import styled from "styled-components";
 
 export const HeaderWrapper = styled(Box)`
   width: 100%;
-  height: 3.25rem;
   position: sticky;
-  padding: 1rem, 2.5rem;
+  padding: 1rem 0rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   background: var(--header-bg-color);
   box-shadow: 0px 0.125rem 1rem 0px rgba(0, 0, 0, 0.05);
 `;
 
 export const HeaderContainerWrapper = styled(Box)`
- position: absolute;
-  top: 0.5375rem; 
-  bottom: 0; 
-  left: 2.5rem; 
   display: flex;
   align-items: center;
   height: 2.25rem; 
+  width: 100%;
+  padding: 0rem 2rem;
+  justify-content: space-between;
 `;
 
 export const HeaderLogo = styled.div`
@@ -87,4 +85,16 @@ export const LabelWithPointer = styled.label`
 export const LogoutIcon = styled.img`
   width: 20px;
   height: 20px;
+`;
+
+export const LogoutButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+  &:hover {
+    transform: scale(1.1);
+    color: #ff4d4f;
+  }
 `;
