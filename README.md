@@ -2,19 +2,11 @@
 **ToDo App** je jednostavna, responzivna aplikacija za upravljanje zadacima — kreirana u Reactu fokusirana na demonstraciju korišćenja Zustand biblioteke za upravljanje globalnim stanjem aplikacije.
 
 # Sadržaj
-- [Tehnologije](#uvod)
-- [React i upravljanje stanjem u React aplikacijama](#uvod)
+- [Tehnologije](#tehnologije)
+- [React](#React)
+- [Upravljanje stanjem(State menagment) u React aplikacijama](#upravljanje-stanjemstate-menagment-u-react-aplikacijama)
 - [Zustand](#uvod)
 - [Pokretanje projekta](#uvod)
-
-
-- `start` starts the development server
-- `build` compiles the application
-- `lint` runs the linter
-- `test` runs the tests
-- `validate` runs type checking, linting and testing
-- `cy:run` runs the cypress tests
-- `generate` runs the code generator
 
 ## Tehnologije
 - [React](https://reactjs.org/)
@@ -23,6 +15,22 @@
 - [Json-server](https://www.npmjs.com/package/json-server)
 - [React Router](https://reactrouter.com/)
 - [React Hook Form](https://react-hook-form.com/)
+
+## React
+React je popularna JavaScript biblioteka za izgradnju interaktivnih korisničkih interfejsa. React se zasniva na komponentama – malim, izolovanim delovima korisničkog interfejsa koji imaju sopstveno stanje i ponašanje. Upravljanje stanjima (state management) u React aplikacijama je jedan od najvažnijih aspekata razvoja, jer omogućava sinhronizaciju prikaza sa podacima i korisničkim interakcijama. Kako aplikacija raste, potreba za deljenjem stanja između više komponenti postaje neizbežna, zbog čega se koriste rešenja za globalno upravljanje stanjima.
+
+U ovom projektu obrađuje se **Zustand**, efikasna biblioteka za upravljanje stanjem, koja nudi jednostavan API kao alternativu većim bibliotekama poput Redux-a.
+
+## Upravljanje stanjem(State menagment) u React aplikacijama
+React u svojoj osnovi pruža osnovne mehanizme za upravljanje stanjima preko *useState* i *useContext* hookova. Za lokalno stanje koristi se `useState`, dok se `useContext` može koristiti za deljenje stanja između komponenti. Međutim, ove metode imaju ograničenja kada aplikacija postane složena:
+- Teško je pratiti promene kada više komponenti menja isto stanje
+- Dolazi do takozvanog "prop drilling"-a
+- Potrebna je bolja skalabilnost i modularnost
+
+Zbog toga se javlja potreba za centralizovanim store-ovima, pojavile su se brojne biblioteke za upravljanje stanjima, kao što su *Redux*, *MobX*, *Recoil*, *Zustand*.
+
+## Zustand
+
 
 # Additional Documentation
 - [🚀 Getting Started](./docs/getting-started.md)
