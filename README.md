@@ -2,7 +2,6 @@
 **ToDo App** je jednostavna, responzivna aplikacija za upravljanje zadacima — kreirana u Reactu fokusirana na demonstraciju korišćenja Zustand biblioteke za upravljanje globalnim stanjem aplikacije.
 
 # Sadržaj
-- [Uvod](#uvod)
 - [Tehnologije](#uvod)
 - [React i upravljanje stanjem u React aplikacijama](#uvod)
 - [Zustand](#uvod)
@@ -16,21 +15,14 @@
 - `validate` runs type checking, linting and testing
 - `cy:run` runs the cypress tests
 - `generate` runs the code generator
-## Uvod
-## Features
+
+## Tehnologije
 - [React](https://reactjs.org/)
 - [Typescript](https://www.typescriptlang.org/)
 - [Zustand](https://github.com/pmndrs/zustand)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Headless UI](https://headlessui.dev/)
+- [Json-server](https://www.npmjs.com/package/json-server)
 - [React Router](https://reactrouter.com/)
 - [React Hook Form](https://react-hook-form.com/)
-- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
-- [Cypress](https://www.cypress.io/)
-- [Jest](https://jestjs.io/)
-- [ESLint](https://eslint.org/)
-- [Husky](https://typicode.github.io/husky/#/)
-- [i18next](https://www.i18next.com/)
 
 # Additional Documentation
 - [🚀 Getting Started](./docs/getting-started.md)
