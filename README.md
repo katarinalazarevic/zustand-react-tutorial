@@ -9,7 +9,8 @@
 - - [Poređenje sa Redux-om](poređenje-sa-redux-om)
 - - [Uloga Zustanda u ovom projektu](#uloga-zustanda-u-ovom-projektu)
 - [Struktura projekta](#struktura-projekta)
-- [Pokretanje projekta](#pokretanje-projekta)
+- [Kreiranje projekta](#kreiranje-projekta)
+- - [Pokretanje projekta](#pokretanje-projekta)
 
 ## Tehnologije
 - [React](https://reactjs.org/)
@@ -24,7 +25,7 @@ React je popularna JavaScript biblioteka za izgradnju interaktivnih korisničkih
 U ovom projektu obrađuje se **Zustand**, efikasna biblioteka za upravljanje stanjem, koja nudi jednostavan API kao alternativu većim bibliotekama poput Redux-a.
 
 ## Upravljanje stanjem(State menagment) u React aplikacijama
-React u svojoj osnovi pruža osnovne mehanizme za upravljanje stanjima preko *useState* i *useContext* hookova. Za lokalno stanje koristi se `useState`, dok se `useContext` može koristiti za deljenje stanja između komponenti. Međutim, ove metode imaju ograničenja kada aplikacija postane složena:
+React u svojoj osnovi pruža osnovne mehanizme za upravljanje stanjima preko *useState* i *useContext* hookova. Za lokalno stanje koristi se `useState`, dok se `useContext` može koristiti za deljenje stanja između komponenti. Svaka komponenta može da prima prop-ove, tj. podatke koje može koristiti u svom scope-u. Uglavnom se prosleđivanje radi iz roditeljske ka detetovoj komponenti. Međutim, ove metode imaju ograničenja kada aplikacija postane složena:
 - Teško je pratiti promene kada više komponenti menja isto stanje
 - Dolazi do takozvanog "prop drilling"-a (prosleđivanje podataka iz jednog komponentnog nivoa ka dubljim komponentama ka dubljim komponentama kroz više međukomponenti koje te podatke uopšte ne koriste, ali ih   samo prosleđuju dalje)
 - Potrebna je bolja skalabilnost i modularnost
@@ -34,32 +35,42 @@ Zbog toga se javlja potreba za centralizovanim store-ovima, pojavile su se brojn
 ## Zustand
 Zustand je minimalistička i skalabilna biblioteka za upravljanje stanjem u React aplikacijama. Koristi hook-based API i omogućava jednostavan i efikasan pristup globalnom stanju bez potrebe za kontekstima, provider-ima ili reducers. Zustand omogućava jednostavno kreiranje globalnog stanja bez potrebe za dodatnim "boilerplate" kodom, kakav je čest kod Redux-a.
 - Kreiranje store-a: Store u Zustand-u je jednostavna funkcija koja koristi create iz zustand paketa. Unutar nje definišemo: *stanje (state)*: svi podaci koje želimo da delimo kroz aplikaciju i *akcije (actions)*: metode koje menjaju stanje
-> interface TaskStore {
->  tasks: string[];
-> addTask: (task: string) => void;
-> }
->
-> export const useTaskStore = create<TaskStore>((set) => ({
+```bash
+ interface TaskStore {
+ tasks: string[];
+ addTask: (task: string) => void;
+ }
+
+ export const useTaskStore = create<TaskStore>((set) => ({
   tasks: [],
   addTask: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
 }));
+```
 - Pristupanje store-u: U komponentama pristupamo stanju pomoću custom hook-a (useTaskStore) i najčešće koristimo dekonstrukciju objekta (object destructuring)
-> const { tasks, addTask } = useTaskStore();
+```bash
+const { tasks, addTask } = useTaskStore();
+```
 - Selektori:  koristi se kada ne želimo da se komponenta re-renderuje zbog promene nebitnih delova stanja. (selektore "odvajaju" samo ono što komponenta koristi)
-> const tasks = useTaskStore((state) => state.tasks);
-
+```bash
+const tasks = useTaskStore((state) => state.tasks);
+```
 - Stanje se menja pozivanjem akcija (actions) koje su deo store-a
->addTask("Novi zadatak");
+  ```bash
+  addTask("Novi zadatak");
+  ```
 
 ### 🔄 Poređenje sa Redux-om
+Redux nudi mnoštvo funkcionalnosti, što ga čini savršenim za velike, složene aplikacije, ali zahteva vreme i trud da se savlada. Zustand, s druge strane, je idealan za brze, jednostavne projekte jer omogućava brzo postavljanje i jednostavno korišćenje bez previše komplikacija.
+
+Zustand i Redux su obe popularne biblioteke za upravljanje stanjem u React aplikacijama, ali nude različite pristupe i imaju svoje prednosti i mane. Zustand se uglavnom preferira zbog svoje jednostavnosti, minimalne količine koda i dobre performanse, što ga čini pogodnim za manje i srednje projekte, kao i za programere koji su novi u upravljanju stanjem. Redux, sa svojim strukturisanim pristupom i bogatim ekosistemom, češće se bira za veće i složenije aplikacije gde je robusno upravljanje stanjem od ključne važnosti.
 
 | Stavka         | Zustand                   | Redux                     |
 |----------------|---------------------------|---------------------------|
 | API složenost  | Jednostavan               | Složen (actions, reducers)|
-| Boilerplate    | Minimalan                 | Opsežan                   |
+| Boilerplate    | Minimalan                 | Velika količina                |
 | Integracija    | Direktna (`useStore`)     | Potrebni `Provider` i `connect` |
 | Performanse    | Odlične (subscribers)     | Dobre, ali zahteva podešavanje |
-| Curva učenja   | Blaga                     | Strma                     |
+| Jednostavnost  | Jednostavan i lak za učenje    | Složen za početnike            |
 
 Zbog svih ovih prednosti, Zustand je idealan izbor za projekte srednje veličine gde je potrebna fleksibilnost, jednostavnost i održivost koda bez komplikacija koje dolaze sa Redux-om.
 
@@ -87,8 +98,36 @@ src/
 │   └── AppRouter.tsx
 └── App.tsx
 ```
+# Kreiranje projekta
+## 1. Kreiranje React aplikacije
+```bash
+npm create vite@latest my-zustand-app -- --template react-ts
+cd my-zustand-app
+npm install
+```
+## 2. Instalacija Zustand biblioteke
+```bash
+npm install zustand
+```
+## 3. Primer kreiranja store-a
+```bash
+import { create } from 'zustand';
 
+interface TaskStore {
+  tasks: string[];
+  addTask: (task: string) => void;
+}
+
+export const useTaskStore = create<TaskStore>((set) => ({
+  tasks: [],
+  addTask: (task) =>
+    set((state) => ({
+      tasks: [...state.tasks, task],
+    })),
+}));
+```
 ## Pokretanje projekta
+Preskočiti korake 1 i 2 ukoliko ste kreirali novi React projekat.
 ### 1. Kloniranje repozitorijuma
 
 ```bash
