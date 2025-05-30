@@ -1,6 +1,4 @@
 import { createTheme } from "@mui/material/styles";
-import ArrowLeftIcon from "src/components/pagination/pagination-icons/arrow-left-icon";
-import ArrowRightIcon from "src/components/pagination/pagination-icons/arrow-right-icon";
 
 const theme = createTheme({
   typography: {
@@ -46,15 +44,6 @@ const theme = createTheme({
       fontSize:"0.875rem",
       fontWeight: "400",
       lineHeight: "1.3rem",
-    }
-  },
-  
-  components: {
-    MuiPaginationItem: {
-      defaultProps: {
-        components: { previous: ArrowLeftIcon, next: ArrowRightIcon },
-      },
-    
     }
   },
 });
