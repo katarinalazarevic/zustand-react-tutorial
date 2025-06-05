@@ -69,7 +69,7 @@ Zustand i Redux su obe popularne biblioteke za upravljanje stanjem u React aplik
 | API složenost  | Jednostavan               | Složen (actions, reducers)|
 | Boilerplate    | Minimalan                 | Velika količina                |
 | Integracija    | Direktna (`useStore`)     | Potrebni `Provider` i `connect` |
-| Performanse    | Odlične (subscribers)     | Dobre, ali zahteva podešavanje |
+| Performanse    | Odlične      | Dobre, ali zahteva podešavanje |
 | Jednostavnost  | Jednostavan i lak za učenje    | Složen za početnike            |
 
 Zbog svih ovih prednosti, Zustand je idealan izbor za projekte srednje veličine gde je potrebna fleksibilnost, jednostavnost i održivost koda bez komplikacija koje dolaze sa Redux-om.
