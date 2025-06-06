@@ -26,6 +26,7 @@ export const useAuthStore = create<AuthStore>()(
           isLoggedIn: false,
           email: '',
           firstName: '',
+          lastName:''
         }),
 
         login: async (email, password) => {
