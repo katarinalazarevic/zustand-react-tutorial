@@ -36,7 +36,7 @@ export const useAuthStore = create<AuthStore>()(
               isLoggedIn: true,
               firstName: data.firstName,
               lastName: data.lastName,
-              email,
+              email: data.email,
             });
             
             return data;
