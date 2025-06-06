@@ -1,7 +1,6 @@
-// TaskModal.tsx
 import React, { useState, useEffect } from "react";
 import { Title } from "src/contents/login-page/login-page.styled";
-import useTaskStore from "src/store/task-store/useTaskStore";
+import { useTaskStore } from 'src/store/task-store/useTaskStore';
 import styled from "styled-components";
 
 const ModalOverlay = styled.div`

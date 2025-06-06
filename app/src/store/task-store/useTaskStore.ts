@@ -22,74 +22,72 @@ interface TaskState {
   setShowCreateModal: (value: boolean) => void;
 }
 
-const useTaskStore = create<TaskState>()(
-  devtools((set, get) => ({
-    tasks: [],
-    showCreateModal: false,
-    selectedTask: null,
-    setSelectedTask: (task) => set({ selectedTask: task }),
+export const useTaskStore = create<TaskState>()((set, get) => ({
+  tasks: [],
+  showCreateModal: false,
+  selectedTask: null,
+  setSelectedTask: (task) => set({ selectedTask: task }),
 
-    fetchTasks: async () => {
-      const res = await fetch("http://localhost:5000/tasks");
-      const data = await res.json();
-      set({ tasks: data });
-    },
+  fetchTasks: async () => {
+    const res = await fetch("http://localhost:5000/tasks");
+    const data = await res.json();
+    set({ tasks: data });
+  },
 
-    addTask: async (task) => {
-      const res = await fetch("http://localhost:5000/tasks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...task, id: Date.now() }),
-      });
-      const newTask = await res.json();
+  addTask: async (task) => {
+    const res = await fetch("http://localhost:5000/tasks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...task, id: Date.now() }),
+    });
+    const newTask = await res.json();
 
-      set((state) => ({
-        tasks: [...state.tasks, newTask],
-      }));
-    },
+    set((state) => ({
+      tasks: [...state.tasks, newTask],
+    }));
+  },
 
-    updateTask: async (id, updatedFields) => {
-      await fetch(`http://localhost:5000/tasks/${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedFields),
-      });
+  updateTask: async (id, updatedFields) => {
+    await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedFields),
+    });
 
-      set((state) => ({
-        tasks: state.tasks.map((t) =>
-          t.id === id ? { ...t, ...updatedFields } : t
-        ),
-      }));
-    },
+    set((state) => ({
+      tasks: state.tasks.map((t) =>
+        t.id === id ? { ...t, ...updatedFields } : t
+      ),
+    }));
+  },
 
-    toggleComplete: async (id) => {
-      const current = get().tasks.find((t) => t.id === id);
-      if (!current) return;
+  toggleComplete: async (id) => {
+    const current = get().tasks.find((t) => t.id === id);
+    if (!current) return;
 
-      const updated = { completed: !current.completed };
-      await fetch(`http://localhost:5000/tasks/${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updated),
-      });
+    const updated = { completed: !current.completed };
+    await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updated),
+    });
 
-      set((state) => ({
-        tasks: state.tasks.map((t) => (t.id === id ? { ...t, ...updated } : t)),
-      }));
-    },
+    set((state) => ({
+      tasks: state.tasks.map((t) => (t.id === id ? { ...t, ...updated } : t)),
+    }));
+  },
 
-    deleteTask: async (id) => {
-      await fetch(`http://localhost:5000/tasks/${id}`, {
-        method: "DELETE",
-      });
+  deleteTask: async (id) => {
+    await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "DELETE",
+    });
 
-      set((state) => ({
-        tasks: state.tasks.filter((t) => t.id !== id),
-      }));
-    },
+    set((state) => ({
+      tasks: state.tasks.filter((t) => t.id !== id),
+    }));
+  },
 
-    setShowCreateModal: (value) => set({ showCreateModal: value }),
-  }))
-);
+  setShowCreateModal: (value) => set({ showCreateModal: value }),
+}));
 
-export default useTaskStore;
+// export default useTaskStore;

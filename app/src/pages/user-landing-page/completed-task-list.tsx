@@ -1,8 +1,8 @@
 import React from 'react'
-import useTaskStore from 'src/store/task-store/useTaskStore'
 import styled from 'styled-components'
 import TaskCard from './task-card'
 import { EmptyMessage } from './task-list'
+import { useTaskStore } from 'src/store/task-store/useTaskStore';
 
 const List = styled.ul`
   list-style: none;

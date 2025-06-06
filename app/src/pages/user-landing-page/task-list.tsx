@@ -1,5 +1,5 @@
 import React from "react";
-import useTaskStore from "src/store/task-store/useTaskStore";
+import { useTaskStore } from 'src/store/task-store/useTaskStore';
 import TaskCard from "./task-card";
 import styled from "styled-components";
 

@@ -1,6 +1,6 @@
 // TaskCard.tsx
 import React from "react";
-import useTaskStore, { Task } from "src/store/task-store/useTaskStore";
+import {useTaskStore ,  Task } from "src/store/task-store/useTaskStore";
 import styled from "styled-components";
 
 const Card = styled.div<{ $completed: boolean }>`

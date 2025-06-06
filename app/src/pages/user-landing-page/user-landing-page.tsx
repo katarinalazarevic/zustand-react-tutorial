@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import useTaskStore from "src/store/task-store/useTaskStore";
 import styled from "styled-components";
 import CreateTaskModal from "./task-modal";
 import TaskList from "./task-list";
 import CompletedTaskList from "./completed-task-list";
 import TaskModal from "./task-modal";
+import { useTaskStore } from "src/store/task-store/useTaskStore";
 
 const Container = styled.div`
   padding: 2rem;
